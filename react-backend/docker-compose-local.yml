@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  cassandra:
+    image: 'gcr.io/google-samples/cassandra:v13'
+    ports:
+      - '7000:7000'
+      - '9042:9042'
+    volumes:
+      - 'cassandra_data:/bitnami'
+    environment:
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_CLUSTER_NAME=cassandracluster
+      - CASSANDRA_DC=DC1-Irving
+      - CASSANDRA_RACK=DC1-Irving-Rack01
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=100M
+#      - CASSANDRA_PASSWORD_SEEDER=yes
+#      - CASSANDRA_PASSWORD=cassandra
+volumes:
+  cassandra_data:
+    driver: local
