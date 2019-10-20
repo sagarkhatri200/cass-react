@@ -1,6 +1,6 @@
 
 server:
-  port: 8082
+  port: 8086
 
 #  spring.data.cassandra.cluster-name= # Name of the Cassandra cluster.
 #  spring.data.cassandra.compression=none # Compression supported by the Cassandra binary protocol.
@@ -24,6 +24,13 @@ server:
 #  spring.data.cassandra.username= # Login user of the server.
 
 spring:
+  application:
+    name: react-backend
+  zipkin:
+    baseUrl: http://127.0.0.1:9411/
+  sleuth:
+    sampler:
+      percentage: 1.0
   data:
     cassandra:
       contact-points: 127.0.0.1 # 192.168.1.48
@@ -31,7 +38,23 @@ spring:
       keyspace-name: fivemilerest
       consistency-level: ANY
       jmx-enabled: false
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+#  web:
+#    skipPattern: (^cleanup.*)
+
+#sample:
+#  zipkin:
+#    enabled: false
+
+#logging:
+#  level:
+#    root: TRACE
 
 logging:
   level:
-    root: INFO
+    org:
+      springframework:
+        cloud:
+          sleuth: DEBUG

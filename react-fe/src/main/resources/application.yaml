@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: react-fe
+  zipkin:
+    baseUrl: http://127.0.0.1:9411/
+  sleuth:
+    sampler:
+      percentage: 1.0
+  cloud:
+    stream:
+      kafka:
+        binder:
+          headers:
+            - X-B3-TraceId
+            - X-B3-SpanId
+            - X-B3-Sampled
+            - X-B3-ParentSpanId
+            - X-Span-Name
+            - X-Span-Export
+
+#  sleuth:
+#    web:
+#      skipPattern: (^cleanup.*)
+#    sampler:
+#      probability: 1.0
+
+sample:
+  zipkin:
+    enabled: true
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        cloud:
+#          sleuth: DEBUG;
+
+
