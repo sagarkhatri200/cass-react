@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -29,6 +30,7 @@ public class RestaurantsService {
                         .map(i-> {
                             Gson gson = new GsonBuilder().create();
                             restaurant.setId(UUID.randomUUID());
+                            restaurant.setName(restaurant.getName() + "-" + LocalDateTime.now().toString());
                             String restaurantString = gson.toJson(restaurant);
                             return SenderRecord.create(new ProducerRecord<>("restaurantevents", restaurant.getId().toString(), restaurantString),i);}))
                 .then();

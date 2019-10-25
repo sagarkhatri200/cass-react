@@ -16,13 +16,18 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 @Component
-public class KafkaRestaurantMessageProcessor implements CommandLineRunner {
+public class KafkaRestaurantMessageProcessor  { //implements CommandLineRunner{
 
-    @Autowired
+    //@Autowired
     KafkaReceiver kafkaReceiver;
 
-    @Override
-    public void run(String... args) throws Exception {
+    public KafkaRestaurantMessageProcessor(KafkaReceiver kafkaReceiver){
+        this.kafkaReceiver = kafkaReceiver;
+        this.run(null);
+    }
+
+    //@Override
+    public void run(String... args) {
         Flux<ReceiverRecord<String,String>> kafkaFlux = kafkaReceiver.receive();
         kafkaFlux.map(r->{
                 ReceiverOffset offset = r.receiverOffset();
